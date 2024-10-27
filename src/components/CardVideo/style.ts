@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardVideoContainer = styled.a`
+export const CardVideoContainer = styled.button`
     width: 100%;
     outline: none;
     cursor: pointer;

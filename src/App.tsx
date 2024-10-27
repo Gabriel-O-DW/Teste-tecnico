@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { axiosClient } from "./services/axiosClient";
-import HomeLayout from "./layout/HomeLayout";
-import BannerCarousel from "./components/Banners/Banners";
-import Playback from "./components/Playback/Playback";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { axiosClient } from './services/axiosClient';
+import HomeLayout from './layout/VideoLayout';
+import BannerCarousel from './components/Banners/Banners';
+import Playback from './components/Playback/Playback';
+import VideoPage from '@/pages/videos/[id]' // Importe o componente de página de vídeo
 
 interface Video {
     id: string;
@@ -37,6 +39,7 @@ function App() {
                 console.log(error);
             });
     };
+
     const getCategories = async () => {
         await axiosClient
             .get("/categories")
@@ -53,49 +56,29 @@ function App() {
         getCategories();
     }, []);
 
-    const filteredVideos = videos
-        .filter((video) => video.category === 1)
-        .slice(0, 4);
+    const filteredVideos = videos.filter((video) => video.category === 1).slice(0, 4);
+    const categoryName = categories.find((category) => category.id === "1")?.title || "Categoria não encontrada";
+    const filteredAoVivo = videos.filter((video) => video.category === 1).slice(0, 2);
 
-    const categoryName =
-        categories.find((category) => category.id === "1")?.title ||
-        "Categoria não encontrada";
-
-        const filteredAoVivo = videos
-        .filter((video) => video.category === 1)
-        .slice(0, 2);
     return (
-        <HomeLayout>
-            <BannerCarousel
-                videos={filteredVideos}
-                categoriesName={categoryName}
-            />
-            <Playback
-                videos={videos}
-                categories={categories}
-                titlePage="Continuar reprodução"
-            />
-             <Playback
-                videos={filteredAoVivo}
-                categories={categories}
-                titlePage="Ao vivo"
-            />
-             <Playback
-                videos={videos}
-                categories={categories}
-                titlePage="Minha lista"
-            />
-             <Playback
-                videos={videos}
-                categories={categories}
-                titlePage="Flow experience 2021"
-            />
-            <Playback
-                videos={videos}
-                categories={categories}
-                titlePage="Playlist"
-            />
-        </HomeLayout>
+        <Router>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <HomeLayout>
+                            <BannerCarousel videos={filteredVideos} categoriesName={categoryName} />
+                            <Playback videos={videos} categories={categories} titlePage="Continuar reprodução" />
+                            <Playback videos={filteredAoVivo} categories={categories} titlePage="Ao vivo" />
+                            <Playback videos={videos} categories={categories} titlePage="Minha lista" />
+                            <Playback videos={videos} categories={categories} titlePage="Flow experience 2021" />
+                            <Playback videos={videos} categories={categories} titlePage="Playlist" />
+                        </HomeLayout>
+                    }
+                />
+                <Route path="/videos/:id" element={<VideoPage />} />
+            </Routes>
+        </Router>
     );
 }
 

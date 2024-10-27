@@ -44,8 +44,11 @@ export const PlaybackContainer = styled.div`
                 line-height: 22px;
                 padding: 2rem 1rem;
             }
+            p {
+                margin-right: 1rem;
+            }
             .carousel-controls {
-                margin-left: 30px;
+                margin-left: 1rem;
                 display: flex;
                 align-items: center;
                 gap: 24px;

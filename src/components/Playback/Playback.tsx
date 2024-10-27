@@ -25,18 +25,20 @@ interface Category {
 interface PlaybackProps {
     videos: Video[];
     categories: Category[];
+    titlePage: string;
 }
 
-export default function Playback({ videos, categories }: PlaybackProps) {
-    // Cria uma referência para o Slider
+export default function Playback({ videos, categories, titlePage }: PlaybackProps) {
     const sliderRef = useRef<Slider>(null);
+
+    const count = videos.length <= 5 ? false : true;
 
     const settings = {
         dots: false,
         infinite: false,
         slidesToShow: 5,
         slidesToScroll: 1,
-        arrows: false, // Desativa as setas padrão do react-slick
+        arrows: false,
         autoplay: true,
         autoplaySpeed: 3000,
         centerMode: false,
@@ -62,12 +64,10 @@ export default function Playback({ videos, categories }: PlaybackProps) {
         ],
     };
 
-    // Função para avançar para o próximo slide
     const handleNext = () => {
         sliderRef.current?.slickNext();
     };
 
-    // Função para voltar para o slide anterior
     const handlePrev = () => {
         sliderRef.current?.slickPrev();
     };
@@ -75,9 +75,10 @@ export default function Playback({ videos, categories }: PlaybackProps) {
     return (
         <PlaybackContainer>
             <div className="container line">
-                <p className="titlePage">Continuar reprodução</p>
+                <p className="titlePage">{titlePage}</p>
                 <div className="more">
                     <p className="more">Veja mais</p>
+                    {count &&
                     <div className="carousel-controls">
                         <button
                             onClick={handlePrev}
@@ -97,7 +98,7 @@ export default function Playback({ videos, categories }: PlaybackProps) {
                                 alt=""
                             />
                         </button>
-                    </div>
+                    </div> }
                 </div>
             </div>
             <Slider
