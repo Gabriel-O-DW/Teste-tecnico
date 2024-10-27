@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { PlaybackContainer } from "./style";
 import CardVideo from "@/components/CardVideo/CardVideo";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import arrowLeft from "@/assets/arrow-left.svg";
 import arrowRigth from "@/assets/arrow-rigth.svg";
 
@@ -28,10 +28,20 @@ interface PlaybackProps {
     titlePage: string;
 }
 
-export default function Playback({ videos, categories, titlePage }: PlaybackProps) {
+export default function Playback({
+    videos,
+    categories,
+    titlePage,
+}: PlaybackProps) {
     const sliderRef = useRef<Slider>(null);
-
+    const [loading, setLoading] = useState(true);
     const count = videos.length <= 5 ? false : true;
+
+    useEffect(() => {
+        if (videos.length > 0) {
+            setLoading(false);
+        }
+    }, [videos]);
 
     const settings = {
         dots: false,
@@ -78,27 +88,28 @@ export default function Playback({ videos, categories, titlePage }: PlaybackProp
                 <p className="titlePage">{titlePage}</p>
                 <div className="more">
                     <p className="more">Veja mais</p>
-                    {count &&
-                    <div className="carousel-controls">
-                        <button
-                            onClick={handlePrev}
-                            className="carousel-button"
-                        >
-                            <img
-                                src={arrowLeft}
-                                alt=""
-                            />
-                        </button>
-                        <button
-                            onClick={handleNext}
-                            className="carousel-button"
-                        >
-                            <img
-                                src={arrowRigth}
-                                alt=""
-                            />
-                        </button>
-                    </div> }
+                    {count && (
+                        <div className="carousel-controls">
+                            <button
+                                onClick={handlePrev}
+                                className="carousel-button"
+                            >
+                                <img
+                                    src={arrowLeft}
+                                    alt=""
+                                />
+                            </button>
+                            <button
+                                onClick={handleNext}
+                                className="carousel-button"
+                            >
+                                <img
+                                    src={arrowRigth}
+                                    alt=""
+                                />
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
             <Slider
@@ -113,6 +124,7 @@ export default function Playback({ videos, categories, titlePage }: PlaybackProp
                         videoThumbnail={video.thumbnail}
                         categoryId={video.category}
                         categories={categories}
+                        loading={loading}
                     />
                 ))}
             </Slider>

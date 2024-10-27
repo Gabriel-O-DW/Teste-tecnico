@@ -58,7 +58,6 @@ function App() {
 
     const filteredVideos = videos.filter((video) => video.category === 1).slice(0, 4);
     const categoryName = categories.find((category) => category.id === "1")?.title || "Categoria não encontrada";
-    const filteredAoVivo = videos.filter((video) => video.category === 1).slice(0, 2);
 
     return (
         <Router>
@@ -69,7 +68,7 @@ function App() {
                         <HomeLayout>
                             <BannerCarousel videos={filteredVideos} categoriesName={categoryName} />
                             <Playback videos={videos} categories={categories} titlePage="Continuar reprodução" />
-                            <Playback videos={filteredAoVivo} categories={categories} titlePage="Ao vivo" />
+                            <Playback videos={videos} categories={categories} titlePage="Ao vivo" />
                             <Playback videos={videos} categories={categories} titlePage="Minha lista" />
                             <Playback videos={videos} categories={categories} titlePage="Flow experience 2021" />
                             <Playback videos={videos} categories={categories} titlePage="Playlist" />
