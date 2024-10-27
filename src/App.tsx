@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { axiosClient } from './services/axiosClient';
-import HomeLayout from './layout/VideoLayout';
+import HomeLayout from './layout/HomeLayout';
 import BannerCarousel from './components/Banners/Banners';
 import Playback from './components/Playback/Playback';
 import VideoPage from '@/pages/videos/[id]' // Importe o componente de página de vídeo

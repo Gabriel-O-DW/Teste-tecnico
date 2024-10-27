@@ -190,14 +190,22 @@ export default function VideoPage() {
                             <span className="date">
                                 {formatDate(video.created_at)}
                             </span>
-                            <button className="fav">
+                            <button className="fav desk">
                                 <img
                                     src={fav}
                                     alt="icone de favorito"
                                 />
                                 Adicionar à minha lista
                             </button>
+                            <button className="fav mob">
+                                <img
+                                    src={fav}
+                                    alt="icone de favorito"
+                                />
+                                Minha lista
+                            </button>
                         </div>
+                        <hr />
                         <div className="right">
                             <button
                                 className="fav likeButton"
@@ -217,7 +225,7 @@ export default function VideoPage() {
                                     size={32}
                                     weight={isDisliked ? "fill" : "regular"}
                                 />
-                                Não é pra mim
+                                <span>Não é pra mim</span>
                             </button>
                             <button
                                 className="fav"

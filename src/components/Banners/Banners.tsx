@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { BannerCarouselContainer } from "./style";
 import { Play } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 
 interface Video {
     id: string;
@@ -60,16 +61,13 @@ export default function BannerCarousel({
                                 <p>
                                     {truncateDescription(video.description, 14)}
                                 </p>
-                                <a
-                                    className="link"
-                                    href="/"
-                                >
+                                <Link to={`/videos/${video.id}`}>
                                     <Play
                                         size={16}
                                         weight="bold"
                                     />
                                     Reproduzir agora
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     ))}

@@ -5,7 +5,11 @@ import userIcon from "@/assets/userIcon.svg";
 import { MenuButton } from "../MenuButton/MenuButton";
 import MenuMobile from "../MenuMobile.tsx/MenuMobile";
 
-export default function Header() {
+interface HeaderProps {
+    className?: string;
+}
+
+export default function Header({ className }: HeaderProps) {
     const menuOptions = [
         {
             title: "Categorias",
@@ -48,38 +52,20 @@ export default function Header() {
         },
     ];
     return (
-        <HeaderContainer>
+        <HeaderContainer className={className}>
             <div className="container">
                 <MenuMobile data={menuOptions} />
-                <a
-                    rel="stylesheet"
-                    href="/"
-                >
-                    <img
-                        src={logo}
-                        alt="Logo"
-                    />
+                <a rel="stylesheet" href="/">
+                    <img src={logo} alt="Logo" />
                 </a>
                 <div className="center">
-                    {menuOptions.map((option, index) => {
-                        return (
-                            <MenuButton
-                                title={option.title}
-                                key={index}
-                                submenu={option.submenu}
-                            />
-                        );
-                    })}
+                    {menuOptions.map((option, index) => (
+                        <MenuButton title={option.title} key={index} submenu={option.submenu} />
+                    ))}
                 </div>
                 <div className="rigth">
-                    <MagnifyingGlass
-                        size={24}
-                        color="#fff"
-                    />
-                    <img
-                        src={userIcon}
-                        alt="Logo"
-                    />
+                    <MagnifyingGlass size={24} color="#fff" />
+                    <img src={userIcon} alt="Logo" />
                 </div>
             </div>
         </HeaderContainer>

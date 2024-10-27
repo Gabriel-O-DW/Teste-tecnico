@@ -8,7 +8,7 @@ interface DefaultLayoutProps {
 export default function VideoLayout({ children }: DefaultLayoutProps) {
     return (
         <>
-            <Header />
+            <Header className="video" />
             <main className="content">{children}</main>
         </>
     );

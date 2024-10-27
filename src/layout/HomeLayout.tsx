@@ -8,7 +8,7 @@ interface DefaultLayoutProps {
 export default function HomeLayout({ children }: DefaultLayoutProps) {
     return (
         <>
-            <Header />
+            <Header className="home" />
             <main className="content">{children}</main>
         </>
     );

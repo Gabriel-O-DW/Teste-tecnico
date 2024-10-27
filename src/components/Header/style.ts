@@ -11,6 +11,15 @@ export const HeaderContainer = styled.header`
         justify-content: space-between;
         align-items: center;
     }
+
+    &.video {
+        background: var(--Header, #3d3d3d);
+    }
+
+     &.home {
+        background-color: #000; 
+        color: white;
+    }
     .center {
         display: flex;
         justify-content: center;
